@@ -1,0 +1,14 @@
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\bin\Debug\netcoreapp3.1\MercerAIConsolePrototype.exe
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\bin\Debug\netcoreapp3.1\MercerAIConsolePrototype.deps.json
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\bin\Debug\netcoreapp3.1\MercerAIConsolePrototype.runtimeconfig.json
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\bin\Debug\netcoreapp3.1\MercerAIConsolePrototype.runtimeconfig.dev.json
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\bin\Debug\netcoreapp3.1\MercerAIConsolePrototype.dll
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\bin\Debug\netcoreapp3.1\MercerAIConsolePrototype.pdb
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\bin\Debug\netcoreapp3.1\UtilitySystem.dll
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\bin\Debug\netcoreapp3.1\UtilitySystem.pdb
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\obj\Debug\netcoreapp3.1\MercerAIConsolePrototype.csprojAssemblyReference.cache
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\obj\Debug\netcoreapp3.1\MercerAIConsolePrototype.AssemblyInfoInputs.cache
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\obj\Debug\netcoreapp3.1\MercerAIConsolePrototype.AssemblyInfo.cs
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\obj\Debug\netcoreapp3.1\MercerAIConsolePrototype.csproj.CopyComplete
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\obj\Debug\netcoreapp3.1\MercerAIConsolePrototype.dll
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\MercerAIConsolePrototype\obj\Debug\netcoreapp3.1\MercerAIConsolePrototype.pdb

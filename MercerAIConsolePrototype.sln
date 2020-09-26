@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MercerAIConsolePrototype", "MercerAIConsolePrototype\MercerAIConsolePrototype.csproj", "{540A05FC-C40C-4F5F-8853-EE83CA4D234E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilitySystem", "UtilitySystem\UtilitySystem.csproj", "{16386D0A-5EF2-4963-B7D6-3E26FECF448E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{540A05FC-C40C-4F5F-8853-EE83CA4D234E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{540A05FC-C40C-4F5F-8853-EE83CA4D234E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{540A05FC-C40C-4F5F-8853-EE83CA4D234E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{540A05FC-C40C-4F5F-8853-EE83CA4D234E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16386D0A-5EF2-4963-B7D6-3E26FECF448E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16386D0A-5EF2-4963-B7D6-3E26FECF448E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16386D0A-5EF2-4963-B7D6-3E26FECF448E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16386D0A-5EF2-4963-B7D6-3E26FECF448E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C55C2BE5-F4AB-4B7E-B40D-70AC776677CD}
+	EndGlobalSection
+EndGlobal

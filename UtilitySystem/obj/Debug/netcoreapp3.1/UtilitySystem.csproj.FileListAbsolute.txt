@@ -1,0 +1,8 @@
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\UtilitySystem\bin\Debug\netcoreapp3.1\UtilitySystem.deps.json
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\UtilitySystem\bin\Debug\netcoreapp3.1\UtilitySystem.dll
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\UtilitySystem\bin\Debug\netcoreapp3.1\UtilitySystem.pdb
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\UtilitySystem\obj\Debug\netcoreapp3.1\UtilitySystem.csprojAssemblyReference.cache
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\UtilitySystem\obj\Debug\netcoreapp3.1\UtilitySystem.AssemblyInfoInputs.cache
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\UtilitySystem\obj\Debug\netcoreapp3.1\UtilitySystem.AssemblyInfo.cs
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\UtilitySystem\obj\Debug\netcoreapp3.1\UtilitySystem.dll
+C:\Users\dekor\source\repos\MercerAIConsolePrototype\UtilitySystem\obj\Debug\netcoreapp3.1\UtilitySystem.pdb
