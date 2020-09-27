@@ -105,12 +105,13 @@ namespace MercerAIConsolePrototype.MercerAI
             var scenarios = new List<Choice>();
 
             var scenario1 = new Choice("Bhaal's Wrath");
-            scenario1.AddConsideration(new ConObjectExists("Shrine to Bhaal", Blackboard));
-            scenario1.AddConsideration(new ConObjectExists("Cursed Statue", Blackboard));
+            var highPriority = new Category("High Priority", 0.7f);
+            scenario1.AddConsideration(new ConObjectExists("Shrine to Bhaal", Blackboard), highPriority);
+            scenario1.AddConsideration(new ConObjectExists("Cursed Statue", Blackboard), highPriority);
             scenario1.AddConsideration(new ConObjectExists("Staff of Bhaal", Blackboard));
             scenario1.AddConsideration(new ConObjectExists("Hunt the Bhaal Priests", Blackboard));
             scenario1.AddConsideration(new ConObjectExists("Forbidden Knowledge", Blackboard));
-            scenario1.AddConsideration(new ConDistanceBetweenTiles("Shrine to Bhaal", "Cursed Statue", 4, 5, Blackboard));
+            scenario1.AddConsideration(new ConDistanceBetweenTiles("Shrine to Bhaal", "Cursed Statue", 4, 5, Blackboard), highPriority);
             scenario1.AddConsideration(new ConPlayerHasClass("Shadow", Blackboard));
             scenarios.Add(scenario1);
 
@@ -125,13 +126,14 @@ namespace MercerAIConsolePrototype.MercerAI
             scenarios.Add(scenario2);
 
             var scenario3 = new Choice("The Thieves' Guild");
+            var highPriority3 = new Category("High Priority", 0.6f);
             scenario3.AddConsideration(new ConObjectExists("Ambush Alley", Blackboard));
             scenario3.AddConsideration(new ConObjectExists("Rat Den", Blackboard));
             scenario3.AddConsideration(new ConObjectExists("Catacomb Landing", Blackboard));
             scenario3.AddConsideration(new ConObjectExists("The One Ring", Blackboard));
             scenario3.AddConsideration(new ConObjectExists("Into the Catacombs", Blackboard));
             scenario3.AddConsideration(new ConObjectExists("Night Music", Blackboard));
-            scenario3.AddConsideration(new ConPlayerHasClass("Thievery", Blackboard, true));
+            scenario3.AddConsideration(new ConPlayerHasClass("Thievery", Blackboard, true), highPriority3);
             scenarios.Add(scenario3);
 
             Agent.AddChoices(scenarios);

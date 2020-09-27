@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace UtilitySystem
 {
@@ -9,45 +10,78 @@ namespace UtilitySystem
         public string Name { get; }
         public float Utility { get; private set; }
 
-        private List<Evaluation> considerations = new List<Evaluation>();
+        private List<Category> categories = new List<Category>();
 
-        public Choice(string name, List<IConsideration> considerations = null)
+        public Choice(string name, List<Category> categories = null)
         {
             Name = name;
 
-            if(considerations != null)
+            if(categories != null)
             {
-                foreach (IConsideration item in considerations)
+                foreach (Category item in categories)
                 {
-                    AddConsideration(item);
+                    AddCategory(item);
                 }
             }
         }
 
-        public void AddConsideration(IConsideration consideration)
+        public void AddCategory(Category category)
         {
-            considerations.Add(consideration.Evaluate);
+            categories.Add(category);
         }
+
+        public Category GetCategory(string categoryName)
+        {
+            return categories.Where(x => x.Name == categoryName).FirstOrDefault();
+        }
+
+        public void AddConsideration(IConsideration consideration, Category category = null)
+        {
+            if(category == null)
+            {
+                category = GetCategory("Default");
+
+                if(category == null)
+                {
+                    AddCategory(new Category("Default", 1.0f));
+                    category = GetCategory("Default");
+                }
+            }
+
+            if (!categories.Contains(category))
+            {
+                AddCategory(category);
+            }
+            
+            category.AddConsideration(consideration);
+        }
+
+        public void AddConsideration(IConsideration consideration, string categoryName)
+        {
+            var category = categories.Where(x => x.Name == categoryName).FirstOrDefault();
+
+            if (category != null)
+            {
+                category.AddConsideration(consideration);
+            }
+        }
+
 
         internal float ScoreUtility()
         {
             float result = 0;
 
-            foreach(var consideration in considerations)
+            foreach (var category in categories)
             {
-                var appraisal = consideration();
-
-                if(appraisal.CanContinue == false)
+                if(category.Name == "Default")
                 {
-                    result = 0;
-                    Utility = 0;
-                    return result;
+                    category.Weight = (1f -  categories.Where(x => x.Name != "Default").Sum(x => x.Weight));
                 }
 
-                result += appraisal.Value;
-            }
+                category.ScoreUtility();
 
-            result = result / considerations.Count;
+                result += category.Utility * category.Weight;
+            }
 
             Utility = result;
 
