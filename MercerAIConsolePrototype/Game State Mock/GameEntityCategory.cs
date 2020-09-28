@@ -1,6 +1,8 @@
-﻿using MercerAIConsolePrototype.Utilities;
+﻿using MercerAIConsolePrototype.MercerAI;
+using MercerAIConsolePrototype.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MercerAIConsolePrototype.Game_State_Mock
@@ -47,7 +49,7 @@ namespace MercerAIConsolePrototype.Game_State_Mock
 		{
 			var entityNames = new List<string>();
 
-			foreach (var entity in Entities)
+			foreach (TEntity entity in Entities)
 			{
 				entityNames.Add(entity.Name);
 			}
@@ -58,6 +60,28 @@ namespace MercerAIConsolePrototype.Game_State_Mock
 		protected List<TEntity> GetEntities()
 		{
 			return Entities;
+		}
+
+		protected TEntity GetAppropriate(List<Tag> tags)
+		{
+			tags = tags.Distinct().ToList();
+
+			var orderedEntities = EntityPool.Where(x => x.Tags != null).OrderByDescending(x => x.Tags.Count()).Where(x => x.Tags.Intersect(tags).Count() > 0).ToList();
+
+			orderedEntities.Shuffle();
+
+			if (orderedEntities.Count > 0)
+				return orderedEntities[0];
+			else if(EntityPool.Count > 0)
+			{
+				EntityPool.Shuffle();
+				return EntityPool[0];
+			}
+			else
+			{
+				return default;
+			}
+				
 		}
 	}
 }

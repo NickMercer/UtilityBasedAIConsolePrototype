@@ -1,7 +1,8 @@
-﻿namespace MercerAIConsolePrototype.Game_State_Mock
+﻿using MercerAIConsolePrototype.MercerAI;
+
+namespace MercerAIConsolePrototype.Game_State_Mock
 {
-	public interface IEntity
+	public interface IEntity : IMercerTrackable
 	{
-		string Name { get; set; }
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using MercerAIConsolePrototype.Events;
 using MercerAIConsolePrototype.Game_State_Mock.Players;
 using MercerAIConsolePrototype.MercerAI.Considerations;
+using MercerAIConsolePrototype.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace MercerAIConsolePrototype.MercerAI
     {
         private Agent Agent;
         private List<IMercerTrackable> Blackboard = new List<IMercerTrackable>();
+        private List<Scenario> Scenarios = new List<Scenario>();
 
 
         //TODO: set update frequency in config or something.
@@ -23,7 +25,7 @@ namespace MercerAIConsolePrototype.MercerAI
         {
             Agent = new Agent();
 
-            InitializeScenarioChoices();
+            InitializeScenarios();
 
             GameStartEvent.RegisterListener(OnGameStart);
             ItemAddEvent.RegisterListener(OnItemAdd);
@@ -100,43 +102,78 @@ namespace MercerAIConsolePrototype.MercerAI
             return result;
         }
 
-        private void InitializeScenarioChoices()
+        public List<Tag> GetRecommendedTags()
         {
-            var scenarios = new List<Choice>();
+            var tags = new List<Tag>();
 
-            var scenario1 = new Choice("Bhaal's Wrath");
-            var highPriority = new Category("High Priority", 0.7f);
-            scenario1.AddConsideration(new ConObjectExists("Shrine to Bhaal", Blackboard), highPriority);
-            scenario1.AddConsideration(new ConObjectExists("Cursed Statue", Blackboard), highPriority);
-            scenario1.AddConsideration(new ConObjectExists("Staff of Bhaal", Blackboard));
-            scenario1.AddConsideration(new ConObjectExists("Hunt the Bhaal Priests", Blackboard));
-            scenario1.AddConsideration(new ConObjectExists("Forbidden Knowledge", Blackboard));
-            scenario1.AddConsideration(new ConDistanceBetweenTiles("Shrine to Bhaal", "Cursed Statue", 4, 5, Blackboard), highPriority);
-            scenario1.AddConsideration(new ConPlayerHasClass("Shadow", Blackboard));
-            scenarios.Add(scenario1);
+            var topScenarios = Scenarios.OrderByDescending(x => x.Choice.Utility).Take(Math.Min(Scenarios.Count(), 1));
 
-            var scenario2 = new Choice("The Great Hunt");
-            scenario2.AddConsideration(new ConObjectExists("Beloved Ranger Statue", Blackboard));
-            scenario2.AddConsideration(new ConObjectExists("Rat Den", Blackboard));
-            scenario2.AddConsideration(new ConObjectExists("Crossbow", Blackboard));
-            scenario2.AddConsideration(new ConObjectExists("Wyrmstooth", Blackboard));
-            scenario2.AddConsideration(new ConObjectExists("The Hunter's Lodge Festivities", Blackboard));
-            scenario2.AddConsideration(new ConObjectExists("Ranger's Guild Initiation", Blackboard));
-            scenario2.AddConsideration(new ConObjectExists("Dragon Killer", Blackboard));
-            scenarios.Add(scenario2);
+            foreach(Scenario scenario in topScenarios)
+            {
+                foreach (var tag in scenario.Tags)
+                {
+                    tags.Add(tag);
+                }
+            }
 
-            var scenario3 = new Choice("The Thieves' Guild");
+            tags.Shuffle();
+
+            if (tags.Count() > 3) tags.RemoveRange(3, tags.Count() - 3);
+
+            return tags;
+        }
+
+
+        private void InitializeScenarios()
+        {
+            
+            var choice1 = new Choice("Bhaal's Wrath");
+            var tags1 = new List<Tag> { Tag.Bhaal, Tag.Arcane, Tag.Cultists };
+
+            var highPriority = new Category("High Priority", 0.6f);
+            choice1.AddConsideration(new ConObjectExists("Shrine to Bhaal", Blackboard), highPriority);
+            choice1.AddConsideration(new ConObjectExists("Cursed Statue", Blackboard), highPriority);
+            choice1.AddConsideration(new ConDistanceBetweenTiles("Shrine to Bhaal", "Cursed Statue", 4, 5, Blackboard), highPriority);
+
+            choice1.AddConsideration(new ConObjectExists("Staff of Bhaal", Blackboard));
+            choice1.AddConsideration(new ConObjectExists("Hunt the Bhaal Priests", Blackboard));
+            choice1.AddConsideration(new ConObjectExists("Forbidden Knowledge", Blackboard));
+            choice1.AddConsideration(new ConPlayerHasClass("Shadow", Blackboard));
+            var scenario1 = new Scenario(choice1, tags1);
+            Scenarios.Add(scenario1);
+
+
+            var choice2 = new Choice("The Great Hunt");
+            var tags2 = new List<Tag> { Tag.Hunters, Tag.Outdoor, Tag.Noble };
+
+            choice2.AddConsideration(new ConObjectExists("Beloved Ranger Statue", Blackboard));
+            choice2.AddConsideration(new ConObjectExists("Rat Den", Blackboard));
+            choice2.AddConsideration(new ConObjectExists("Crossbow", Blackboard));
+            choice2.AddConsideration(new ConObjectExists("Wyrmstooth", Blackboard));
+            choice2.AddConsideration(new ConObjectExists("The Hunter's Lodge Festivities", Blackboard));
+            choice2.AddConsideration(new ConObjectExists("Ranger's Guild Initiation", Blackboard));
+            choice2.AddConsideration(new ConObjectExists("Dragon Killer", Blackboard));
+            var scenario2 = new Scenario(choice2, tags2);
+            Scenarios.Add(scenario2);
+
+
+            var choice3 = new Choice("The Thieves' Guild");
+            var tags3 = new List<Tag> { Tag.Outlaw, Tag.Thieves, Tag.Underground, Tag.Catacombs, Tag.CityGuard };
+
             var highPriority3 = new Category("High Priority", 0.6f);
-            scenario3.AddConsideration(new ConObjectExists("Ambush Alley", Blackboard));
-            scenario3.AddConsideration(new ConObjectExists("Rat Den", Blackboard));
-            scenario3.AddConsideration(new ConObjectExists("Catacomb Landing", Blackboard));
-            scenario3.AddConsideration(new ConObjectExists("The One Ring", Blackboard));
-            scenario3.AddConsideration(new ConObjectExists("Into the Catacombs", Blackboard));
-            scenario3.AddConsideration(new ConObjectExists("Night Music", Blackboard));
-            scenario3.AddConsideration(new ConPlayerHasClass("Thievery", Blackboard, true), highPriority3);
-            scenarios.Add(scenario3);
+            choice3.AddConsideration(new ConPlayerHasClass("Thievery", Blackboard, true), highPriority3);
 
-            Agent.AddChoices(scenarios);
+
+            choice3.AddConsideration(new ConObjectExists("Ambush Alley", Blackboard));
+            choice3.AddConsideration(new ConObjectExists("Rat Den", Blackboard));
+            choice3.AddConsideration(new ConObjectExists("Catacomb Landing", Blackboard));
+            choice3.AddConsideration(new ConObjectExists("The One Ring", Blackboard));
+            choice3.AddConsideration(new ConObjectExists("Into the Catacombs", Blackboard));
+            choice3.AddConsideration(new ConObjectExists("Night Music", Blackboard));
+            var scenario3 = new Scenario(choice3, tags3);
+            Scenarios.Add(scenario3);
+
+            Scenarios.ForEach(x => Agent.AddChoice(x.Choice));
         }
     }
 }

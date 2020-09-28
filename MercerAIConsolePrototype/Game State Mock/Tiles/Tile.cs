@@ -10,10 +10,14 @@ namespace MercerAIConsolePrototype.Game_State_Mock.Tiles
 		public static List<int> locations = new List<int> { 1, 4, 2, 6, 5, 9, 11, 13, 2, 7, 6, 9, 0, 2, 3 };
 		public string Name { get; set; }
 		public int Location { get; set; }
+		public List<Tag> Tags { get; set; }
 
-		public Tile(string name)
+		public Tile(string name, List<Tag> tags = null)
 		{
 			Name = name;
+			Tags = tags;
+
+			if (Tags == null) tags = new List<Tag>();
 
 			var rand = new Random();
 

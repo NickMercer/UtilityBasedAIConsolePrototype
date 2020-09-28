@@ -1,0 +1,21 @@
+﻿public enum Tag
+{
+    Indoor,
+    Outdoor,
+    Underground,
+    OtherDimension,
+    Catacombs,
+    Street,
+    Noble,
+    Outlaw,
+    Weapon,
+    Armor,
+    Thieves,
+    Bhaal,
+    Cultists,
+    CityGuard,
+    Ambassador,
+    Hunters,
+    Mages,
+    Arcane,
+}

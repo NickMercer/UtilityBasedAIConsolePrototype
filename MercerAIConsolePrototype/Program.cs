@@ -81,14 +81,19 @@ namespace MercerAIConsolePrototype
 				case "round":
 					Random rand = new Random();
 
-					Console.WriteLine(Game.ItemEvent(rand.Next(0, 5)));
-					Console.WriteLine(Game.DialogueEvent(rand.Next(0, 5)));
+					for(var i = 0; i < rand.Next(0, 5); i++)
+					{
+						Console.WriteLine(Game.ItemEvent(Mercer.GetRecommendedTags()));
+					}
+
+					for (var i = 0; i < rand.Next(0, 5); i++)
+					{
+						Console.WriteLine(Game.DialogueEvent(Mercer.GetRecommendedTags()));
+					}
 					return true;
 
 				case "item":
-					Console.WriteLine("How many?");
-					var itemCount = int.Parse(Console.ReadLine());
-					Console.WriteLine(Game.ItemEvent(itemCount));
+					Console.WriteLine(Game.ItemEvent(Mercer.GetRecommendedTags()));
 					return true;
 
 				case "items":
@@ -96,9 +101,7 @@ namespace MercerAIConsolePrototype
 					return true;
 
 				case "event":
-					Console.WriteLine("How many?");
-					var eventCount = int.Parse(Console.ReadLine());
-					Console.WriteLine(Game.DialogueEvent(eventCount));
+					Console.WriteLine(Game.DialogueEvent(Mercer.GetRecommendedTags()));
 					return true;
 
 				case "events":

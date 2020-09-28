@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace UtilitySystem
@@ -11,6 +12,7 @@ namespace UtilitySystem
         public float Utility { get; private set; }
 
         private List<Category> categories = new List<Category>();
+
 
         public Choice(string name, List<Category> categories = null)
         {
@@ -25,11 +27,11 @@ namespace UtilitySystem
             }
         }
 
+
         public void AddCategory(Category category)
         {
             categories.Add(category);
         }
-
         public Category GetCategory(string categoryName)
         {
             return categories.Where(x => x.Name == categoryName).FirstOrDefault();
@@ -55,7 +57,6 @@ namespace UtilitySystem
             
             category.AddConsideration(consideration);
         }
-
         public void AddConsideration(IConsideration consideration, string categoryName)
         {
             var category = categories.Where(x => x.Name == categoryName).FirstOrDefault();

@@ -32,14 +32,14 @@ namespace MercerAIConsolePrototype.Game_State_Mock
 			startEvent.FireEvent();
 		}
 
-		public string ItemEvent(int itemCount)
+		public string ItemEvent(List<Tag> tags = null)
 		{
-			return ItemSet.GenerateItems(itemCount);
+			return ItemSet.GenerateItem(tags);
 		}
 
-		public string DialogueEvent(int dialogueCount)
+		public string DialogueEvent(List<Tag> tags = null)
 		{
-			return DialogueSet.GenerateDialogues(dialogueCount);
+			return DialogueSet.GenerateDialogue(tags);
 		}
 
 		public void GetTiles()
