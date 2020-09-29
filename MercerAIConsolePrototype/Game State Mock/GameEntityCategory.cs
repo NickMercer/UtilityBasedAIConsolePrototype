@@ -62,7 +62,7 @@ namespace MercerAIConsolePrototype.Game_State_Mock
 			return Entities;
 		}
 
-		protected TEntity GetAppropriate(List<Tag> tags)
+		protected TEntity GetAppropriate(List<Tag> tags, int appropriateItemPercentage = 100)
 		{
 			tags = tags.Distinct().ToList();
 
@@ -70,7 +70,11 @@ namespace MercerAIConsolePrototype.Game_State_Mock
 
 			orderedEntities.Shuffle();
 
-			if (orderedEntities.Count > 0)
+			var rand = new Random();
+
+			var num = rand.Next(0, 100);
+
+			if (orderedEntities.Count > 0 && num < appropriateItemPercentage)
 				return orderedEntities[0];
 			else if(EntityPool.Count > 0)
 			{

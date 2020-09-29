@@ -5,19 +5,25 @@ using System.Text;
 
 namespace UtilitySystem
 {
-    internal class Reasoner
+    public class Reasoner
     {
-        private Agent instance;
         private List<Choice> Choices = new List<Choice>();
 
-        public Reasoner(Agent agent)
+        public Reasoner()
         {
-            instance = agent;
         }
 
         public void AddChoice(Choice choice)
         {
             Choices.Add(choice);
+        }
+
+        public void AddChoices(List<Choice> choices)
+        {
+            foreach (var choice in choices)
+            {
+                AddChoice(choice);
+            }
         }
 
         public void RemoveChoice(string name)

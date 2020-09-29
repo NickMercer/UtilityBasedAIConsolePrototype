@@ -12,18 +12,21 @@ namespace MercerAIConsolePrototype.MercerAI
 {
     public class Mercer
     {
-        private Agent Agent;
+        private Reasoner Reasoner;
         private List<IMercerTrackable> Blackboard = new List<IMercerTrackable>();
         private List<Scenario> Scenarios = new List<Scenario>();
 
 
-        //TODO: set update frequency in config or something.
+        //TODO: set update frequency and scenario count to promote in config or something.
         private int updateFrequency = 3;
         private int updateCounter = 0;
 
+        private int topScenarioCount = 2;
+        
+
         public Mercer()
         {
-            Agent = new Agent();
+            Reasoner = new Reasoner();
 
             InitializeScenarios();
 
@@ -52,7 +55,7 @@ namespace MercerAIConsolePrototype.MercerAI
                 Blackboard.Add(player); 
             }
 
-            Agent.UpdateScores();
+            Reasoner.ScoreChoices();
         }
 
         private void OnItemAdd(ItemAddEvent info)
@@ -73,7 +76,7 @@ namespace MercerAIConsolePrototype.MercerAI
             if (updateCounter >= updateFrequency)
             {
                 updateCounter = 0;
-                Agent.UpdateScores();
+                Reasoner.ScoreChoices();
             }
         }
 
@@ -92,7 +95,7 @@ namespace MercerAIConsolePrototype.MercerAI
 
         public List<string> GetScores()
         {
-            var choices = Agent.GetChoices();
+            var choices = Reasoner.GetChoices();
             var result = new List<string>();
 
             foreach (var choice in choices)
@@ -106,7 +109,7 @@ namespace MercerAIConsolePrototype.MercerAI
         {
             var tags = new List<Tag>();
 
-            var topScenarios = Scenarios.OrderByDescending(x => x.Choice.Utility).Take(Math.Min(Scenarios.Count(), 1));
+            var topScenarios = Scenarios.OrderByDescending(x => x.Choice.Utility).Take(Math.Min(Scenarios.Count(), topScenarioCount));
 
             foreach(Scenario scenario in topScenarios)
             {
@@ -122,7 +125,6 @@ namespace MercerAIConsolePrototype.MercerAI
 
             return tags;
         }
-
 
         private void InitializeScenarios()
         {
@@ -173,7 +175,7 @@ namespace MercerAIConsolePrototype.MercerAI
             var scenario3 = new Scenario(choice3, tags3);
             Scenarios.Add(scenario3);
 
-            Scenarios.ForEach(x => Agent.AddChoice(x.Choice));
+            Scenarios.ForEach(x => Reasoner.AddChoice(x.Choice));
         }
     }
 }

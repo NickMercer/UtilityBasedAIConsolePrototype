@@ -53,7 +53,7 @@ namespace MercerAIConsolePrototype.Game_State_Mock.Items
 			}
 			else
 			{
-				item = GetAppropriate(tags);
+				item = GetAppropriate(tags, 70);
 			}
 
 			Entities.Add(item);

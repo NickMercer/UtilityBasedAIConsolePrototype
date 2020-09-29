@@ -52,7 +52,7 @@ namespace MercerAIConsolePrototype.Game_State_Mock.Dialogues
 			}
 			else
 			{
-				dialogue = GetAppropriate(tags);
+				dialogue = GetAppropriate(tags, 70);
 			}
 
 			Entities.Add(dialogue);
